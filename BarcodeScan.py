@@ -1,3 +1,5 @@
+#This file will read and generates barcode from image or scan the barcode with camera
+
 import cv2
 from pyzbar import pyzbar
 stop= 0
@@ -30,7 +32,7 @@ def read_barcodes(frame):
 
     return frame
 def main():
-   #  Camera code
+   #  Code for opening camera and scan the barcode
    #1
     camera = cv2.VideoCapture(0)
     ret, frame = camera.read()
@@ -51,7 +53,7 @@ def main():
     #3
     camera.release()
 
-   #    Image Scanning code
+   #    Code for Scan an image from your folder
 
    # height = 800
    # width = 600

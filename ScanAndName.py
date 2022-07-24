@@ -1,3 +1,4 @@
+#This file will read and generates barcode from image or scan the barcode with camera and give the name of the product
 import cv2
 import requests
 from bs4 import BeautifulSoup
@@ -40,10 +41,11 @@ def read_barcodes(frame):
     return frame
 
 def nameSearch(id):
+    #This fuction will search for product name in the online dataset it is not avilable for every product
     barcode = id
     URL = 'https://api.upcitemdb.com/prod/trial/lookup?upc=' + ''.join(barcode)
     headers = {
-        "User-Agent": 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.159 Safari/537.36 Edg/92.0.902.78'}
+        "User-Agent": 'YOURCREDENTIALS'}  #use your own User-Agernt credentials insted of YOURCREDENTIALS
 
     page = requests.get(URL, headers=headers)
 
@@ -69,7 +71,8 @@ def nameSearch(id):
 
     
 def main():
-    '''# 1
+    #  Code for opening camera and scan the barcode
+    # 1
     camera = cv2.VideoCapture(0)
     ret, frame = camera.read()
     #2
@@ -88,25 +91,29 @@ def main():
 
     #3
     camera.release()
-    cv2.destroyAllWindows()'''
-    height = 800
-    width = 600
-    green = (0, 255, 0)
-
-    image = cv2.imread("abc.jpg")
-
-    image = cv2.resize(image, (width, height))
-    orig_image = image.copy()
-    frame = read_barcodes(orig_image)
-    gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # convert the image to gray scale
-    blur = cv2.GaussianBlur(gray, (5, 5), 0)  # Add Gaussian blur
-    edged = cv2.Canny(blur, 75, 200)  # Apply the Canny algorithm to find the edges
-
-    # Show the image and the edges
-    # cv2.imshow('Original image:', image)
-    # cv2.imshow('Edged:', edged)
-    # cv2.waitKey(0)
     cv2.destroyAllWindows()
+
+
+    #    Code for Scan an image from your folder
+
+    # height = 800
+    # width = 600
+    # green = (0, 255, 0)
+    #
+    # image = cv2.imread("abc.jpg")
+    #
+    # image = cv2.resize(image, (width, height))
+    # orig_image = image.copy()
+    # frame = read_barcodes(orig_image)
+    # gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)  # convert the image to gray scale
+    # blur = cv2.GaussianBlur(gray, (5, 5), 0)  # Add Gaussian blur
+    # edged = cv2.Canny(blur, 75, 200)  # Apply the Canny algorithm to find the edges
+    #
+    # # Show the image and the edges
+    # # cv2.imshow('Original image:', image)
+    # # cv2.imshow('Edged:', edged)
+    # # cv2.waitKey(0)
+    # cv2.destroyAllWindows()
 
 
 
